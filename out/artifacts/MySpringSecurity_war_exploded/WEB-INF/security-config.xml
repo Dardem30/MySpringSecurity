@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<b:beans xmlns="http://www.springframework.org/schema/security"
+         xmlns:b="http://www.springframework.org/schema/beans"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="
+	http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security.xsd
+	http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd">
+   <http auto-config="true">
+       <intercept-url pattern="/" access="hasRole('ROLE_ADMIN')"/>
+   </http>
+    <authentication-manager alias="authenticationManager">
+        <authentication-provider user-service-ref="configUserSecurity">
+        </authentication-provider>
+    </authentication-manager>
+    <b:bean id="configUserSecurity" class="by.service.ConfigUserSecurity">
+          <b:property name="daoUser" ref="daoUser"/>
+    </b:bean>
+</b:beans>
